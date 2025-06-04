@@ -5,12 +5,29 @@ import { Navigate } from "react-router-dom"
 import { useAuth } from "../contexts/AuthContext"
 import toast from "react-hot-toast"
 import { User, Lock, LogIn } from "lucide-react"
+import axios from 'axios';
+
 
 const Login = () => {
   const [email, setEmail] = useState("")
   const [password, setPassword] = useState("")
   const [loading, setLoading] = useState(false)
   const { user, login } = useAuth()
+
+  const handleLogin = async (e) => {
+    e.preventDefault();
+
+    try {
+      const response = await axios.post('http://localhost:5000/api/users/login', {
+        email,
+        password,
+      });
+
+      alert(response.data.message);
+    } catch (err) {
+      alert(err.response?.data?.message || 'Login failed');
+    }
+  };
 
   if (user) {
     return <Navigate to="/" />
@@ -97,9 +114,7 @@ const Login = () => {
             </button>
           </div>
 
-          <div className="text-center">
-            <p className="text-sm text-gray-600">Demo credentials: admin@example.com / password123</p>
-          </div>
+          
         </form>
       </div>
     </div>

@@ -2,7 +2,7 @@ import User from "../models/User.js"
 import jwt from "jsonwebtoken"
 
 const generateToken = (userId) => {
-  return jwt.sign({ userId }, process.env.JWT_SECRET || "your-secret-key", {
+  return jwt.sign({ userId }, process.env.JWT_SECRET || {
     expiresIn: "7d",
   })
 }
@@ -80,11 +80,11 @@ export const login = async (req, res) => {
 }
 
 // Get current user
-export const getCurrentUser = async (req, res) => {
-  try {
-    const user = await User.findById(req.userId).select("-password")
-    res.json(user)
-  } catch (error) {
-    res.status(500).json({ message: error.message })
-  }
-}
+// export const getCurrentUser = async (req, res) => {
+//   try {
+//     const user = await User.findById(req.userId).select("-password")
+//     res.json(user)
+//   } catch (error) {
+//     res.status(500).json({ message: error.message })
+//   }
+// }
