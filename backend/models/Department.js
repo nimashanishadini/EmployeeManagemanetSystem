@@ -14,10 +14,7 @@ const departmentSchema = new mongoose.Schema(
       trim: true,
       maxlength: [500, "Description cannot exceed 500 characters"],
     },
-    manager: {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: "Employee",
-    },
+    
     budget: {
       type: Number,
       min: [0, "Budget cannot be negative"],

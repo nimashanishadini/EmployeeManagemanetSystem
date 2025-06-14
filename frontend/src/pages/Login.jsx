@@ -30,7 +30,7 @@ const Login = () => {
   };
 
   if (user) {
-    return <Navigate to="/employees" />
+    return <Navigate to="/" />
   }
 
   const handleSubmit = async (e) => {

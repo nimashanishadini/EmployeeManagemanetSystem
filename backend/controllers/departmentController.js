@@ -2,17 +2,26 @@ import Department from "../models/Department.js"
 import Employee from "../models/Employee.js"
 
 // Get all departments
+// export const getAllDepartments = async (req, res) => {
+//   try {
+//     const departments = await Department.find().populate("manager", "firstName lastName")
+//     res.json(departments)
+//   } catch (error) {
+//     res.status(500).json({ message: error.message })
+//   }
+// }
+
 export const getAllDepartments = async (req, res) => {
   try {
-    const departments = await Department.find().populate("manager", "firstName lastName")
-    res.json(departments)
+    const departments = await Department.find();
+    res.json(departments);
   } catch (error) {
-    res.status(500).json({ message: error.message })
+    res.status(500).json({ message: error.message });
   }
-}
+};
 
 // Get department by ID
-export const getDepartmentById = async (req, res) => {
+export const getDepartments = async (req, res) => {
   try {
     const department = await Department.findById(req.params.id).populate("manager", "firstName lastName")
 
@@ -27,21 +36,34 @@ export const getDepartmentById = async (req, res) => {
 }
 
 // Create new department
-export const createDepartment = async (req, res) => {
-  try {
-    const department = new Department(req.body)
-    const savedDepartment = await department.save()
-    const populatedDepartment = await Department.findById(savedDepartment._id).populate("manager", "firstName lastName")
+// export const createDepartment = async (req, res) => {
+//   try {
+//     const department = new Department(req.body)
+//     const savedDepartment = await department.save()
+//     const populatedDepartment = await Department.findById(savedDepartment._id).populate("manager", "firstName lastName")
 
-    res.status(201).json(populatedDepartment)
-  } catch (error) {
-    if (error.code === 11000) {
-      res.status(400).json({ message: "Department with this name already exists" })
-    } else {
-      res.status(400).json({ message: error.message })
+//     res.status(201).json(populatedDepartment)
+//   } catch (error) {
+//     if (error.code === 11000) {
+//       res.status(400).json({ message: "Department with this name already exists" })
+//     } else {
+//       res.status(400).json({ message: error.message })
+//     }
+//   }
+// }
+
+
+export const createDepartment = async (req, res) => {
+    try {
+        console.log("Received data:", req.body); // Debug log
+        const department = new Department(req.body);
+        await department.save();
+        res.status(201).json(department);
+    } catch (error) {
+        console.error("Error creating department:", error);
+        res.status(400).json({ message: error.message });
     }
-  }
-}
+};
 
 // Update department
 export const updateDepartment = async (req, res) => {

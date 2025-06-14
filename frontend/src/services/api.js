@@ -47,11 +47,11 @@ export const employeeAPI = {
 
 // Department API
 export const departmentAPI = {
-  getAll: () => api.get("/departments"),
+  getAll: () => api.get('/departments'),
   getById: (id) => api.get(`/departments/${id}`),
-  create: (data) => api.post("/departments", data),
+  create: (data) => api.post('/departments', data), // Correct spelling here
   update: (id, data) => api.put(`/departments/${id}`, data),
   delete: (id) => api.delete(`/departments/${id}`),
-}
+};
 
 export default api

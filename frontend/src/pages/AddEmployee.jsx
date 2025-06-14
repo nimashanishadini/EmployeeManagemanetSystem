@@ -22,14 +22,38 @@ const AddEmployee = () => {
     fetchDepartments()
   }, [])
 
+  // const fetchDepartments = async () => {
+  //   try {
+  //     const response = await departmentAPI.getAll()
+  //     setDepartments(response.data)
+  //   } catch (error) {
+  //     toast.error("Error fetching departments")
+  //   }
+  // }
+
   const fetchDepartments = async () => {
-    try {
-      const response = await departmentAPI.getAll()
-      setDepartments(response.data)
-    } catch (error) {
-      toast.error("Error fetching departments")
-    }
+  try {
+    const response = await departmentAPI.getAll();
+    setDepartments(response.data);
+  } catch (error) {
+    console.error("Error fetching departments:", error);
+    toast.error(error.response?.data?.message || "Error fetching departments");
   }
+};
+
+
+useEffect(() => {
+    const loadDepartments = async () => {
+      try {
+        const response = await departmentAPI.getAll()
+        setDepartments(response.data)
+      } catch (error) {
+        console.error("Department fetch error:", error)
+        toast.error("Failed to load departments. Please try again later.")
+      }
+    }
+    loadDepartments()
+  }, [])
 
   const onSubmit = async (data) => {
     setLoading(true)
@@ -38,6 +62,7 @@ const AddEmployee = () => {
       toast.success("Employee created successfully")
       navigate("/employees")
     } catch (error) {
+      console.error("Employee creation error:", error)
       toast.error(error.response?.data?.message || "Error creating employee")
     } finally {
       setLoading(false)
