@@ -83,7 +83,6 @@ const EditEmployee = () => {
       <div className="flex items-center space-x-4">
         <button onClick={() => navigate("/employees")} className="flex items-center text-gray-600 hover:text-gray-800">
           <ArrowLeft className="h-5 w-5 mr-1" />
-          Back to Employees
         </button>
         <h1 className="text-3xl font-bold text-gray-900">Edit Employee</h1>
       </div>
@@ -255,10 +254,10 @@ const EditEmployee = () => {
 
           {/* Submit Button */}
           <div className="flex justify-end space-x-4">
-            <button type="button" onClick={() => navigate("/employees")} className="btn btn-secondary">
+            <button type="button" onClick={() => navigate("/employees")} className="btn cursor-pointer btn-secondary">
               Cancel
             </button>
-            <button type="submit" disabled={loading} className="btn btn-primary flex items-center space-x-2">
+            <button type="submit" disabled={loading} className=" cursor-pointer px-6 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors disabled:opacity-50 disabled:cursor-not-allowed flex items-center space-x-2">
               <Save className="h-4 w-4" />
               <span>{loading ? "Updating..." : "Update Employee"}</span>
             </button>

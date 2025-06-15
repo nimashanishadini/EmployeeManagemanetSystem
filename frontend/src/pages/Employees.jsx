@@ -88,10 +88,6 @@ const Employees = () => {
           <h1 className="text-3xl font-bold text-gray-900">Employees</h1>
           <p className="text-gray-600">Manage your organization's employees</p>
         </div>
-        <Link to="/employees/add" className="btn btn-primary flex items-center space-x-2">
-          <Plus className="h-4 w-4" />
-          <span>Add Employee</span>
-        </Link>
       </div>
 
       {/* Filters */}
